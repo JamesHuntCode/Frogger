@@ -16,7 +16,8 @@ namespace Frogger
         #region initiate classes and objects
 
         private Graphics Frogger;
-
+        private Frog playerIcon;
+        private List<Log> logs = new List<Log>();
 
         public Form1()
         {
@@ -53,8 +54,13 @@ namespace Frogger
         // Play Game:
         private void draw()
         {
+            // Set up canvas:
             Frogger = this.picGame.CreateGraphics();
             Frogger.Clear(ColorTranslator.FromHtml("#333"));
+
+            // Draw player icon:
+            playerIcon = new Frog(25, 25, 0, 0);
+
         }
 
         #endregion

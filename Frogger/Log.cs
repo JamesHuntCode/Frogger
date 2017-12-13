@@ -17,6 +17,10 @@ namespace Frogger
 
         private double velocity;
 
+        // Direction of log:
+
+        private int direction;
+
         // Constructor:
 
         public Log(double h, double w, int x, int y, double v)
@@ -26,6 +30,19 @@ namespace Frogger
             this.posX = x;
             this.posY = y;
             this.velocity = v;
+
+            // Set movement direction:
+
+            Random rnd = new Random();
+
+            if (rnd.Next(0, 2) == 1)
+            {
+                this.direction = 1; // Sweep left accross screen
+            }
+            else
+            {
+                this.direction = 2; // Sweep right accross screen
+            }
         }
 
         // Getter Methods:
@@ -80,6 +97,29 @@ namespace Frogger
         public void SetV (double v)
         {
             this.velocity = v;
+        }
+
+        // Custom Methods:
+
+        public void move ()
+        {
+
+        }
+
+        // Method tracking log position:
+
+        public bool offScreen (int leftSide, int rightSide)
+        {
+            if (this.posX + this.width < 0) // Too far left
+            {
+                return true;
+            }
+
+            if (this.posX > rightSide) // Too far right
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

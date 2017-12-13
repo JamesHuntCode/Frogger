@@ -27,44 +27,44 @@ namespace Frogger
 
         // Getter Methods:
 
-        public double GetH ()
+        public double GetH()
         {
             return this.height;
         }
 
-        public double GetW ()
+        public double GetW()
         {
             return this.width;
         }
 
-        public int GetX ()
+        public int GetX()
         {
             return this.posX;
         }
 
-        public int GetY ()
+        public int GetY()
         {
             return this.posY;
         }
 
         // Setter Methods:
 
-        public void SetH (double h)
+        public void SetH(double h)
         {
             this.height = h;
         }
 
-        public void SetW (double w)
+        public void SetW(double w)
         {
             this.width = w;
         }
 
-        public void SetX (int x)
+        public void SetX(int x)
         {
             this.posX = x;
         }
 
-        public void SetY (int y)
+        public void SetY(int y)
         {
             this.posY = y;
         }
@@ -72,24 +72,31 @@ namespace Frogger
         // Custom Methods:
 
         // Method controlling Frog movement
-        public void updatePos (int direction, int leftSide, int rightSide, int bottom, int top)
+        public void updatePos(int direction, int leftSide, int rightSide, int bottom, int top)
         {
-            if (direction == 1 && (this.posX - 50) > leftSide) // Move left
+            if (direction == 1 && (this.posX - this.width / 2) > leftSide) // Move left
             {
-
+                this.posX -= 50;
             }
-            else if (direction == 2 && (this.posX + 50) < rightSide) // Move right
+            else if (direction == 2 && (this.posX + this.width) < rightSide) // Move right
             {
-
+                this.posX += 50;
             }
-            else if (direction == 3 && (this.posY - 50) > top) // Move up
+            else if (direction == 3 && (this.posY - this.width) > top) // Move up
             {
-
+                this.posY -= 50;
             }
-            else if (direction == 4 && (this.posY + 50) < bottom) // Move down
+            else if (direction == 4 && (this.posY + this.width) < bottom) // Move down
             {
-
+                this.posY += 50;
             }
         }
+
+        // Method to check if player reaches safe zone
+        public bool reachTop(int currentY, int top)
+        {
+            return (currentY < top + this.height);
+        }
     }
+
 }

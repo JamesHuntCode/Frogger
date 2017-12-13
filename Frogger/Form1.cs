@@ -42,7 +42,18 @@ namespace Frogger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            playerIcon = new Frog(50, 50, (this.picGame.Width / 2), (this.picGame.Height - 40));
+            // Make player icon
+            playerIcon = new Frog(50, 50, (this.picGame.Width / 2), (this.picGame.Height - 50));
+
+            // Add logs to map
+            Random rnd = new Random();
+            int offsetY = 50;
+            for (int i = 0; i < 16; i++)
+            {
+                // Check if log already exists near new random location
+                this.logs.Add(new Log(50, 200, rnd.Next(0, this.Width - 200), offsetY, rnd.Next(0, 2), rnd.Next(2, 3)));
+                offsetY += 50;
+            }
 
             // Timer used to call draw method (60FPS)
             Timer play = new Timer();
@@ -74,8 +85,17 @@ namespace Frogger
             SolidBrush drawPlayer = new SolidBrush(Color.Green);
             Frogger.FillRectangle(drawPlayer, this.playerIcon.GetX(), this.playerIcon.GetY(), Convert.ToInt32(this.playerIcon.GetH()), Convert.ToInt32(this.playerIcon.GetW()));
 
-            // Draw logs:
-            
+            // Draw 'logs':
+            SolidBrush drawLog = new SolidBrush(Color.White);
+            for (int i = 0; i < this.logs.Count; i++)
+            {
+                // Make logs appear
+                Frogger.FillRectangle(drawLog, this.logs[i].GetX(), this.logs[i].GetY(), Convert.ToInt32(this.logs[i].GetW()), Convert.ToInt32(this.logs[i].GetH()));
+
+                // Give logs their behaviours
+                this.logs[i].move();
+                this.logs[i].offScreen(0, this.picGame.Width);
+            }
         }
 
         #endregion

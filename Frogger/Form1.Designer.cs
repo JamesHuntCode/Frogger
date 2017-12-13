@@ -58,6 +58,7 @@
             this.ClientSize = new System.Drawing.Size(1396, 809);
             this.Controls.Add(this.picTopSafeZone);
             this.Controls.Add(this.picGame);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Frogger - James Hunt";

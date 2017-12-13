@@ -15,44 +15,32 @@ namespace Frogger
         private int posX;
         private int posY;
 
-        private double velocity;
+        private int velocity;
 
         // Direction of log:
 
         private int direction;
 
-        // Constructor:
+        // Constructor: 
 
-        public Log(double h, double w, int x, int y, double v)
+        public Log(double h, double w, int x, int y, int d, int v)
         {
             this.height = h;
             this.width = w;
             this.posX = x;
             this.posY = y;
+            this.direction = d;
             this.velocity = v;
-
-            // Set movement direction:
-
-            Random rnd = new Random();
-
-            if (rnd.Next(0, 2) == 1)
-            {
-                this.direction = 1; // Sweep left accross screen
-            }
-            else
-            {
-                this.direction = 2; // Sweep right accross screen
-            }
         }
 
         // Getter Methods:
 
-        public double GetHeight()
+        public double GetH()
         {
             return this.height;
         }
 
-        public double GetWidth()
+        public double GetW()
         {
             return this.width;
         }
@@ -67,7 +55,7 @@ namespace Frogger
             return this.posY;
         }
 
-        public double GetV()
+        public int GetV()
         {
             return this.velocity;
         }
@@ -94,7 +82,7 @@ namespace Frogger
             this.posY = y;
         }
 
-        public void SetV (double v)
+        public void SetV (int v)
         {
             this.velocity = v;
         }
@@ -103,23 +91,30 @@ namespace Frogger
 
         public void move ()
         {
-
+            if (direction == 1) // Move log left
+            {
+                this.posX -= this.velocity;
+            }
+            else // Move log right
+            {
+                this.posX += this.velocity;
+            }
         }
 
         // Method tracking log position:
 
-        public bool offScreen (int leftSide, int rightSide)
+        public void offScreen (int leftSide, int rightSide)
         {
             if (this.posX + this.width < 0) // Too far left
             {
-                return true;
+                this.posX = rightSide;
             }
 
             if (this.posX > rightSide) // Too far right
             {
-                return true;
+                this.posX = leftSide - Convert.ToInt32(this.width);
             }
-            return false;
+            
         }
     }
 }

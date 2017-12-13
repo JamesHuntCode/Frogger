@@ -68,5 +68,28 @@ namespace Frogger
         {
             this.posY = y;
         }
+
+        // Custom Methods:
+
+        // Method controlling Frog movement
+        public void updatePos (int direction, int leftSide, int rightSide, int bottom, int top)
+        {
+            if (direction == 1 && (this.posX - 50) > leftSide) // Move left
+            {
+
+            }
+            else if (direction == 2 && (this.posX + 50) < rightSide) // Move right
+            {
+
+            }
+            else if (direction == 3 && (this.posY - 50) > top) // Move up
+            {
+
+            }
+            else if (direction == 4 && (this.posY + 50) < bottom) // Move down
+            {
+
+            }
+        }
     }
 }

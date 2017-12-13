@@ -22,6 +22,7 @@ namespace Frogger
         public Form1()
         {
             InitializeComponent();
+            this.KeyDown += this.Form1_KeyDown;
         }
 
         #endregion
@@ -59,10 +60,45 @@ namespace Frogger
             Frogger.Clear(ColorTranslator.FromHtml("#333"));
 
             // Draw player icon:
-            playerIcon = new Frog(25, 25, 0, 0);
+            playerIcon = new Frog(40, 40, 0, 0);
+            SolidBrush drawPlayer = new SolidBrush(Color.Green);
+
+            // Put player in starting position:
+            this.playerIcon.SetX((this.picGame.Width / 2) - (Convert.ToInt32(this.playerIcon.GetW() / 2)));
+            this.playerIcon.SetY(this.picGame.Height - (Convert.ToInt32(this.playerIcon.GetH())));
+            this.Frogger.FillRectangle(drawPlayer, this.playerIcon.GetX(), this.playerIcon.GetY(), Convert.ToInt32(this.playerIcon.GetH()), Convert.ToInt32(this.playerIcon.GetW()));
 
         }
 
         #endregion
+
+        // Frogger Movement:
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+
+
+
+                    break;
+                case Keys.Down:
+
+
+
+                    break;
+                case Keys.Left:
+
+
+
+                    break;
+                case Keys.Right:
+
+
+
+                    break;
+            }
+        }
     }
 }

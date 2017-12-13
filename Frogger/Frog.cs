@@ -82,7 +82,7 @@ namespace Frogger
             {
                 this.posX += 50;
             }
-            else if (direction == 3 && (this.posY - this.width) > top) // Move up
+            else if (direction == 3 && (this.posY - this.width / 2) > top) // Move up
             {
                 this.posY -= 50;
             }

@@ -42,18 +42,18 @@ namespace Frogger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Make player icon
-            playerIcon = new Frog(50, 50, (this.picGame.Width / 2), (this.picGame.Height - 50));
-
             // Add logs to map
             Random rnd = new Random();
             int offsetY = 50;
             for (int i = 0; i < 16; i++)
             {
-                // Check if log already exists near new random location
-                this.logs.Add(new Log(50, 200, rnd.Next(0, this.Width - 200), offsetY, rnd.Next(0, 2), rnd.Next(2, 3)));
+                // Make algorithm to check if row has same velocity setting as row above it & *MAYBE* allow for multiple logs on one row - implement later
+                this.logs.Add(new Log(50, 200, rnd.Next(0, this.Width - 200), offsetY, rnd.Next(0, 2), rnd.Next(1, 3)));
                 offsetY += 50;
             }
+
+            // Make player icon
+            playerIcon = new Frog(50, 50, (this.picGame.Width / 2), (this.picGame.Height - 50));
 
             // Timer used to call draw method (60FPS)
             Timer play = new Timer();
@@ -77,15 +77,11 @@ namespace Frogger
 
         private void draw()
         {
-            // Set up canvas:
+            // Set up canvas
             Graphics Frogger = this.picGame.CreateGraphics();
             Frogger.Clear(ColorTranslator.FromHtml("#333"));
 
-            // Draw player icon:
-            SolidBrush drawPlayer = new SolidBrush(Color.Green);
-            Frogger.FillRectangle(drawPlayer, this.playerIcon.GetX(), this.playerIcon.GetY(), Convert.ToInt32(this.playerIcon.GetH()), Convert.ToInt32(this.playerIcon.GetW()));
-
-            // Draw 'logs':
+            // Draw 'logs'
             SolidBrush drawLog = new SolidBrush(Color.White);
             for (int i = 0; i < this.logs.Count; i++)
             {
@@ -95,6 +91,24 @@ namespace Frogger
                 // Give logs their behaviours
                 this.logs[i].move();
                 this.logs[i].offScreen(0, this.picGame.Width);
+
+                // Check if player is on log
+                if (((this.playerIcon.GetX() > this.logs[i].GetX()) && (this.playerIcon.GetX() < (this.logs[i].GetX() + this.logs[i].GetW()))) /* && check player is not where they started */)
+                {
+                    // Player is not on a log and has died
+                    MessageBox.Show("YOU DIED!");
+                }
+            }
+
+            // Draw player icon
+            SolidBrush drawPlayer = new SolidBrush(Color.Green);
+            Frogger.FillRectangle(drawPlayer, this.playerIcon.GetX(), this.playerIcon.GetY(), Convert.ToInt32(this.playerIcon.GetH()), Convert.ToInt32(this.playerIcon.GetW()));
+
+            // Enable player behaviours:
+
+            if (this.playerIcon.reachTop(this.playerIcon.GetY() ,0))
+            {
+                // Player has successfully reached the safe zone
             }
         }
 

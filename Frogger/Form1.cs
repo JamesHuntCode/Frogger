@@ -100,12 +100,15 @@ namespace Frogger
             
                 for (int i = 0; i < this.logs.Count; i++)
                 {
+                    // Player is on the log
                     if (this.logs[i].frogIsRiding(this.playerIcon))
                     {
                         frogOnLog = true;
+                        this.playerIcon.moveWithLog(this.logs[i]);
                     }
                 }
 
+                // Player missed the log
                 if (!frogOnLog)
                 {
                     this.playerIcon.resetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
@@ -120,7 +123,7 @@ namespace Frogger
 
             if (this.playerIcon.reachTop(this.playerIcon.GetY(), 0))
             {
-                // Player has successfully reached the safe zone
+                MessageBox.Show("You Win!");
             }
         }
 

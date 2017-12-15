@@ -60,6 +60,11 @@ namespace Frogger
             return this.velocity;
         }
 
+        public int GetD()
+        {
+            return this.direction;
+        }
+
         // Setter Methods:
 
         public void SetH(double h)
@@ -119,10 +124,10 @@ namespace Frogger
         // Method to check if frog is riding log:
         public bool frogIsRiding(Frog frog)
         {
-            return !(this.posX > (frog.GetX() + frog.GetW()) ||
-                (this.posX + this.width) < frog.GetX() ||
-                this.posY > (frog.GetY() + frog.GetH()) ||
-                (this.posY + this.height) < frog.GetY());
+            return !(this.posX >= (frog.GetX() + frog.GetW()) ||
+                (this.posX + this.width) <= frog.GetX() ||
+                this.posY >= (frog.GetY() + frog.GetH()) ||
+                (this.posY + this.height) <= frog.GetY());
         }
     }
 }

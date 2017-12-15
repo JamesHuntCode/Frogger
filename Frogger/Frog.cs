@@ -92,6 +92,19 @@ namespace Frogger
             }
         }
 
+        // Method to allow frog to move with log it is currently riding
+        public void moveWithLog(Log log)
+        {
+            if (log.GetD() == 1) // Move frog left
+            {
+                this.posX -= log.GetV();
+            }
+            else // Move frog right
+            {
+                this.posX += log.GetV();
+            }
+        }
+
         // Method to check if player reaches safe zone
         public bool reachTop(int currentY, int top)
         {

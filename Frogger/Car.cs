@@ -122,7 +122,7 @@ namespace Frogger
         }
 
         // Method to check if car has hit frog:
-        public bool hitFrog(Frog frog)
+        public bool hitsFrog(Frog frog)
         {
             return !(this.posX >= (frog.GetX() + frog.GetW()) ||
                 (this.posX + this.width) <= frog.GetX() ||

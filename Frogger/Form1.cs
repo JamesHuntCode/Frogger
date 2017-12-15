@@ -38,15 +38,53 @@ namespace Frogger
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Random rnd = new Random();
+
             #region add cars to game
 
+            int carVel;
+            int randomCarX1;
+            int randomCarX2;
+            int randomCarX3;
+            int randomCarD;
+            int tempCarVel = -1;
+            int carOffset = 500;
 
+            for (int i = 0; i < 7; i++)
+            {
+                // Create random velocity and direction
+                carVel = rnd.Next(2, 4);
+                randomCarD = rnd.Next(0, 2);
+                randomCarX1 = rnd.Next(0, this.picGame.Width);
+                randomCarX2 = rnd.Next(0, this.picGame.Width);
+                randomCarX3 = rnd.Next(0, this.picGame.Width);
+
+                // Set new velocity if car above has same velocity value
+                while (carVel == tempCarVel)
+                {
+                    carVel = rnd.Next(2, 5);
+                }
+
+                // Make sure each car is spaced apart fairly
+                while (randomCarX3 < (randomCarX2 + 250) || randomCarX2 < (randomCarX1 + 250))
+                {
+                    randomCarX1 = rnd.Next(0, this.picGame.Width);
+                    randomCarX2 = rnd.Next(0, this.picGame.Width);
+                    randomCarX3 = rnd.Next(0, this.picGame.Width);
+                }
+
+                this.cars.Add(new Car(50, 50, randomCarX1, carOffset, randomCarD, carVel));
+                this.cars.Add(new Car(50, 50, randomCarX2, carOffset, randomCarD, carVel));
+                this.cars.Add(new Car(50, 50, randomCarX3, carOffset, randomCarD, carVel));
+
+                // Increment offset
+                carOffset += 50;
+                tempCarVel = carVel;
+            }
 
             #endregion
 
             #region add logs to game
-
-            Random rnd = new Random();
 
             int randomV;
             int randomX1;
@@ -70,7 +108,7 @@ namespace Frogger
                 }
 
                 // Make sure each log is spaced apart fairly
-                while (randomX2 < randomX1 + 250)
+                while (randomX2 < (randomX1 + 250))
                 {
                     randomX1 = rnd.Next(0, this.Width - 200);
                     randomX2 = rnd.Next(0, this.Width - 200);
@@ -121,6 +159,31 @@ namespace Frogger
 
             // Draw safe zone in middle of map
             Frogger.FillRectangle(safeZone, 0, 450, 1500, 50);
+
+            // Draw cars
+            SolidBrush carBrush = new SolidBrush(Color.Orange);
+            for (int i = 0; i < this.cars.Count; i++)
+            {
+                // Make cars appear
+                Frogger.FillRectangle(carBrush, this.cars[i].GetX(), this.cars[i].GetY(), Convert.ToInt32(this.cars[i].GetW()), Convert.ToInt32(this.cars[i].GetH()));
+
+                // Give cars their behaviours
+                this.cars[i].move();
+                this.cars[i].offScreen(0, this.picGame.Width);
+            }
+
+            // Check if player has been hit by car
+            if (this.playerIcon.GetY() > 49 && !this.playerIcon.reachTop(this.playerIcon.GetY()))
+            {
+                for (int i = 0; i < this.cars.Count; i++)
+                {
+                    // Player has been hit by car
+                    if (this.cars[i].hitsFrog(this.playerIcon))
+                    {
+                        this.playerIcon.resetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
+                    }
+                }
+            }
 
             // Draw logs
             SolidBrush drawLog = new SolidBrush(Color.White);

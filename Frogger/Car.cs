@@ -94,7 +94,7 @@ namespace Frogger
 
         // Custom Methods:
 
-        public void move()
+        public void Move()
         {
             if (direction == 1) // Move log left
             {
@@ -107,7 +107,7 @@ namespace Frogger
         }
 
         // Method tracking car position:
-        public void offScreen(int leftSide, int rightSide)
+        public void OffScreen(int leftSide, int rightSide)
         {
             if (this.posX + this.width < 0) // Too far left
             {
@@ -122,7 +122,7 @@ namespace Frogger
         }
 
         // Method to check if car has hit frog:
-        public bool hitsFrog(Frog frog)
+        public bool HitsFrog(Frog frog)
         {
             return !(this.posX >= (frog.GetX() + frog.GetW()) ||
                 (this.posX + this.width) <= frog.GetX() ||

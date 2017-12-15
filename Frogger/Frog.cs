@@ -72,7 +72,7 @@ namespace Frogger
         // Custom Methods:
 
         // Method controlling Frog movement
-        public void updatePos(int direction, int leftSide, int rightSide, int bottom, int top)
+        public void UpdatePos(int direction, int leftSide, int rightSide, int bottom, int top)
         {
             if (direction == 1 && (this.posX - this.width / 2) > leftSide) // Move left
             {
@@ -93,7 +93,7 @@ namespace Frogger
         }
 
         // Method to allow frog to move with log it is currently riding
-        public void moveWithLog(Log log)
+        public void MoveWithLog(Log log)
         {
             if (log.GetD() == 1) // Move frog left
             {
@@ -106,13 +106,13 @@ namespace Frogger
         }
 
         // Method to check if player reaches safe zone
-        public bool reachTop(int currentY)
+        public bool ReachTop(int currentY)
         {
             return (currentY < 50);
         }
 
         // Method to send player back to starting position
-        public void resetPosition(int x, int y)
+        public void ResetPosition(int x, int y)
         {
             this.posX = x;
             this.posY = y;

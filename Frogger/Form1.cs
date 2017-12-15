@@ -168,19 +168,19 @@ namespace Frogger
                 Frogger.FillRectangle(carBrush, this.cars[i].GetX(), this.cars[i].GetY(), Convert.ToInt32(this.cars[i].GetW()), Convert.ToInt32(this.cars[i].GetH()));
 
                 // Give cars their behaviours
-                this.cars[i].move();
-                this.cars[i].offScreen(0, this.picGame.Width);
+                this.cars[i].Move();
+                this.cars[i].OffScreen(0, this.picGame.Width);
             }
 
             // Check if player has been hit by car
-            if (this.playerIcon.GetY() > 49 && !this.playerIcon.reachTop(this.playerIcon.GetY()))
+            if (this.playerIcon.GetY() > 49 && !this.playerIcon.ReachTop(this.playerIcon.GetY()))
             {
                 for (int i = 0; i < this.cars.Count; i++)
                 {
                     // Player has been hit by car
-                    if (this.cars[i].hitsFrog(this.playerIcon))
+                    if (this.cars[i].HitsFrog(this.playerIcon))
                     {
-                        this.playerIcon.resetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
+                        this.playerIcon.ResetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
                     }
                 }
             }
@@ -193,21 +193,21 @@ namespace Frogger
                 Frogger.FillRectangle(drawLog, this.logs[i].GetX(), this.logs[i].GetY(), Convert.ToInt32(this.logs[i].GetW()), Convert.ToInt32(this.logs[i].GetH()));
 
                 // Give logs their behaviours
-                this.logs[i].move();
-                this.logs[i].offScreen(0, this.picGame.Width);
+                this.logs[i].Move();
+                this.logs[i].OffScreen(0, this.picGame.Width);
             }
 
             // Check if player is on log
-            if (this.playerIcon.GetY() < 450 && !this.playerIcon.reachTop(this.playerIcon.GetY()))
+            if (this.playerIcon.GetY() < 450 && !this.playerIcon.ReachTop(this.playerIcon.GetY()))
             {
                 bool frogOnLog = false;
             
                 for (int i = 0; i < this.logs.Count; i++)
                 {
                     // Player is on the log
-                    if (this.logs[i].frogIsRiding(this.playerIcon))
+                    if (this.logs[i].FrogIsRiding(this.playerIcon))
                     {
-                        this.playerIcon.moveWithLog(this.logs[i]);
+                        this.playerIcon.MoveWithLog(this.logs[i]);
                         frogOnLog = true;
                     }
                 }
@@ -215,7 +215,7 @@ namespace Frogger
                 // Player missed the log
                 if (!frogOnLog)
                 {
-                    this.playerIcon.resetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
+                    this.playerIcon.ResetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
                 }
             }
 
@@ -224,7 +224,7 @@ namespace Frogger
             Frogger.FillRectangle(drawPlayer, this.playerIcon.GetX(), this.playerIcon.GetY(), Convert.ToInt32(this.playerIcon.GetH()), Convert.ToInt32(this.playerIcon.GetW()));
 
             // Player has reached the top
-            if (this.playerIcon.reachTop(this.playerIcon.GetY()))
+            if (this.playerIcon.ReachTop(this.playerIcon.GetY()))
             {
                 // ADD SOMETHING HERE
             }
@@ -240,22 +240,22 @@ namespace Frogger
             {
                 case Keys.Up:
 
-                    this.playerIcon.updatePos(3, 0, this.picGame.Width, this.picGame.Height, 0);
+                    this.playerIcon.UpdatePos(3, 0, this.picGame.Width, this.picGame.Height, 0);
                    
                     break;
                 case Keys.Down:
 
-                    this.playerIcon.updatePos(4, 0, this.picGame.Width, this.picGame.Height, 0);
+                    this.playerIcon.UpdatePos(4, 0, this.picGame.Width, this.picGame.Height, 0);
 
                     break;
                 case Keys.Left:
 
-                    this.playerIcon.updatePos(1, 0, this.picGame.Width, this.picGame.Height, 0);
+                    this.playerIcon.UpdatePos(1, 0, this.picGame.Width, this.picGame.Height, 0);
 
                     break;
                 case Keys.Right:
 
-                    this.playerIcon.updatePos(2, 0, this.picGame.Width, this.picGame.Height, 0);
+                    this.playerIcon.UpdatePos(2, 0, this.picGame.Width, this.picGame.Height, 0);
 
                     break;
             }

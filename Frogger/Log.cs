@@ -87,14 +87,14 @@ namespace Frogger
             this.posY = y;
         }
 
-        public void SetV (int v)
+        public void SetV(int v)
         {
             this.velocity = v;
         }
 
         // Custom Methods:
 
-        public void move ()
+        public void Move()
         {
             if (direction == 1) // Move log left
             {
@@ -107,7 +107,7 @@ namespace Frogger
         }
 
         // Method tracking log position:
-        public void offScreen (int leftSide, int rightSide)
+        public void OffScreen(int leftSide, int rightSide)
         {
             if (this.posX + this.width < 0) // Too far left
             {
@@ -122,7 +122,7 @@ namespace Frogger
         }
 
         // Method to check if frog is riding log:
-        public bool frogIsRiding(Frog frog)
+        public bool FrogIsRiding(Frog frog)
         {
             return !(this.posX >= (frog.GetX() + frog.GetW()) ||
                 (this.posX + this.width) <= frog.GetX() ||

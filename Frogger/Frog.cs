@@ -97,6 +97,13 @@ namespace Frogger
         {
             return (currentY < top + this.height);
         }
+
+        // Method to send player back to starting position
+        public void resetPosition(int x, int y)
+        {
+            this.posX = x;
+            this.posY = y;
+        }
     }
 
 }

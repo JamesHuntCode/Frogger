@@ -8,3 +8,12 @@ C:\Users\James\Desktop\Coding Projects\Frogger\Frogger\bin\Debug\Frogger.exe
 C:\Users\James\Desktop\Coding Projects\Frogger\Frogger\bin\Debug\Frogger.pdb
 C:\Users\James\Desktop\Coding Projects\Frogger\Frogger\obj\Debug\Frogger.exe
 C:\Users\James\Desktop\Coding Projects\Frogger\Frogger\obj\Debug\Frogger.pdb
+D:\Frogger\Frogger\bin\Debug\Frogger.exe.config
+D:\Frogger\Frogger\bin\Debug\Frogger.exe
+D:\Frogger\Frogger\bin\Debug\Frogger.pdb
+D:\Frogger\Frogger\obj\Debug\Frogger.csprojResolveAssemblyReference.cache
+D:\Frogger\Frogger\obj\Debug\Frogger.Form1.resources
+D:\Frogger\Frogger\obj\Debug\Frogger.Properties.Resources.resources
+D:\Frogger\Frogger\obj\Debug\Frogger.csproj.GenerateResource.Cache
+D:\Frogger\Frogger\obj\Debug\Frogger.exe
+D:\Frogger\Frogger\obj\Debug\Frogger.pdb

@@ -102,7 +102,6 @@ namespace Frogger
         }
 
         // Method tracking log position:
-
         public void offScreen (int leftSide, int rightSide)
         {
             if (this.posX + this.width < 0) // Too far left
@@ -115,6 +114,15 @@ namespace Frogger
                 this.posX = leftSide - Convert.ToInt32(this.width);
             }
             
+        }
+
+        // Method to check if frog is riding log:
+        public bool frogIsRiding(Frog frog)
+        {
+            return !(this.posX > (frog.GetX() + frog.GetW()) ||
+                (this.posX + this.width) < frog.GetX() ||
+                this.posY > (frog.GetY() + frog.GetH()) ||
+                (this.posY + this.height) < frog.GetY());
         }
     }
 }

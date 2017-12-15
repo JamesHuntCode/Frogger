@@ -81,7 +81,7 @@ namespace Frogger
             Graphics Frogger = this.picGame.CreateGraphics();
             Frogger.Clear(ColorTranslator.FromHtml("#333"));
 
-            // Draw 'logs'
+            // Draw logs
             SolidBrush drawLog = new SolidBrush(Color.White);
             for (int i = 0; i < this.logs.Count; i++)
             {
@@ -91,12 +91,24 @@ namespace Frogger
                 // Give logs their behaviours
                 this.logs[i].move();
                 this.logs[i].offScreen(0, this.picGame.Width);
+            }
 
-                // Check if player is on log
-                if (((this.playerIcon.GetX() > this.logs[i].GetX()) && (this.playerIcon.GetX() < (this.logs[i].GetX() + this.logs[i].GetW()))) /* && check player is not where they started */)
+            // Check if player is on log
+            if (this.playerIcon.GetY() < this.picGame.Height - this.playerIcon.GetH())
+            {
+                bool frogOnLog = false;
+            
+                for (int i = 0; i < this.logs.Count; i++)
                 {
-                    // Player is not on a log and has died
-                    MessageBox.Show("YOU DIED!");
+                    if (this.logs[i].frogIsRiding(this.playerIcon))
+                    {
+                        frogOnLog = true;
+                    }
+                }
+
+                if (!frogOnLog)
+                {
+                    this.playerIcon.resetPosition((this.picGame.Width / 2), (this.picGame.Height - 50));
                 }
             }
 
@@ -106,7 +118,7 @@ namespace Frogger
 
             // Enable player behaviours:
 
-            if (this.playerIcon.reachTop(this.playerIcon.GetY() ,0))
+            if (this.playerIcon.reachTop(this.playerIcon.GetY(), 0))
             {
                 // Player has successfully reached the safe zone
             }

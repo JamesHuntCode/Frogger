@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frogger
 {
-    class Frog
+    class Car 
     {
         // Attributes:
         private double height;
@@ -15,14 +15,22 @@ namespace Frogger
         private int posX;
         private int posY;
 
-        // Constructor:
+        private int velocity;
 
-        public Frog(double h, double w, int x, int y)
+        // Direction of car:
+
+        private int direction;
+
+        // Constructor: 
+
+        public Car(double h, double w, int x, int y, int d, int v)
         {
             this.height = h;
             this.width = w;
             this.posX = x;
             this.posY = y;
+            this.direction = d;
+            this.velocity = v;
         }
 
         // Getter Methods:
@@ -47,6 +55,16 @@ namespace Frogger
             return this.posY;
         }
 
+        public int GetV()
+        {
+            return this.velocity;
+        }
+
+        public int GetD()
+        {
+            return this.direction;
+        }
+
         // Setter Methods:
 
         public void SetH(double h)
@@ -69,54 +87,49 @@ namespace Frogger
             this.posY = y;
         }
 
+        public void SetV(int v)
+        {
+            this.velocity = v;
+        }
+
         // Custom Methods:
 
-        // Method controlling Frog movement
-        public void updatePos(int direction, int leftSide, int rightSide, int bottom, int top)
+        public void move()
         {
-            if (direction == 1 && (this.posX - this.width / 2) > leftSide) // Move left
+            if (direction == 1) // Move log left
             {
-                this.posX -= 50;
+                this.posX -= this.velocity;
             }
-            else if (direction == 2 && (this.posX + this.width) < rightSide) // Move right
+            else // Move log right
             {
-                this.posX += 50;
-            }
-            else if (direction == 3 && (this.posY - this.width / 2) > top) // Move up
-            {
-                this.posY -= 50;
-            }
-            else if (direction == 4 && (this.posY + this.width) < bottom) // Move down
-            {
-                this.posY += 50;
+                this.posX += this.velocity;
             }
         }
 
-        // Method to allow frog to move with log it is currently riding
-        public void moveWithLog(Log log)
+        // Method tracking car position:
+        public void offScreen(int leftSide, int rightSide)
         {
-            if (log.GetD() == 1) // Move frog left
+            if (this.posX + this.width < 0) // Too far left
             {
-                this.posX -= log.GetV();
+                this.posX = rightSide;
             }
-            else // Move frog right
+
+            if (this.posX > rightSide) // Too far right
             {
-                this.posX += log.GetV();
+                this.posX = leftSide - Convert.ToInt32(this.width);
             }
+
         }
 
-        // Method to check if player reaches safe zone
-        public bool reachTop(int currentY)
+        // Method to check if car has hit frog:
+        public bool hitFrog(Frog frog)
         {
-            return (currentY < 50);
-        }
-
-        // Method to send player back to starting position
-        public void resetPosition(int x, int y)
-        {
-            this.posX = x;
-            this.posY = y;
+            return !(this.posX >= (frog.GetX() + frog.GetW()) ||
+                (this.posX + this.width) <= frog.GetX() ||
+                this.posY >= (frog.GetY() + frog.GetH()) ||
+                (this.posY + this.height) <= frog.GetY());
         }
     }
-
 }
+    
+

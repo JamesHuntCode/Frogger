@@ -16,6 +16,7 @@ namespace Frogger
 
         private Frog playerIcon;
         private List<Log> logs = new List<Log>();
+        private List<Car> cars = new List<Car>();
 
         public Form1()
         {
@@ -28,11 +29,6 @@ namespace Frogger
             this.picGame.Width = 1500;
             this.picGame.Location = new Point(0, 0);
 
-            this.picTopSafeZone.BackColor = Color.LightGreen;
-            this.picTopSafeZone.Height = 62;
-            this.picTopSafeZone.Width = 1500;
-            this.picTopSafeZone.Location = new Point(0, 0);
-
             this.KeyDown += this.Form1_KeyDown;
         }
 
@@ -42,7 +38,14 @@ namespace Frogger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Add logs to map
+            #region add cars to game
+
+
+
+            #endregion
+
+            #region add logs to game
+
             Random rnd = new Random();
 
             int randomV;
@@ -52,7 +55,7 @@ namespace Frogger
             int tempV = -1;
             int offsetY = 50;
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 8; i++)
             {
                 // Create random velocity and direction
                 randomV = rnd.Next(1, 3);
@@ -80,6 +83,8 @@ namespace Frogger
                 offsetY += 50;
                 tempV = randomV;
             }
+
+            #endregion
 
             // Make player icon
             playerIcon = new Frog(50, 50, (this.picGame.Width / 2), (this.picGame.Height - 50));
@@ -110,6 +115,13 @@ namespace Frogger
             Graphics Frogger = this.picGame.CreateGraphics();
             Frogger.Clear(ColorTranslator.FromHtml("#333"));
 
+            // Draw safe zone at top of map
+            SolidBrush safeZone = new SolidBrush(Color.Gray);
+            Frogger.FillRectangle(safeZone, 0, 0, 1500, 50);
+
+            // Draw safe zone in middle of map
+            Frogger.FillRectangle(safeZone, 0, 450, 1500, 50);
+
             // Draw logs
             SolidBrush drawLog = new SolidBrush(Color.White);
             for (int i = 0; i < this.logs.Count; i++)
@@ -123,7 +135,7 @@ namespace Frogger
             }
 
             // Check if player is on log
-            if (this.playerIcon.GetY() < this.picGame.Height - this.playerIcon.GetH())
+            if (this.playerIcon.GetY() < 450 && !this.playerIcon.reachTop(this.playerIcon.GetY()))
             {
                 bool frogOnLog = false;
             
@@ -148,12 +160,10 @@ namespace Frogger
             SolidBrush drawPlayer = new SolidBrush(Color.Green);
             Frogger.FillRectangle(drawPlayer, this.playerIcon.GetX(), this.playerIcon.GetY(), Convert.ToInt32(this.playerIcon.GetH()), Convert.ToInt32(this.playerIcon.GetW()));
 
-            // Enable player behaviours:
-
             // Player has reached the top
             if (this.playerIcon.reachTop(this.playerIcon.GetY()))
             {
-                MessageBox.Show("YOU WIN!");
+                // ADD SOMETHING HERE
             }
         }
 

@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.picGame = new System.Windows.Forms.PictureBox();
-            this.picTopSafeZone = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picGame)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTopSafeZone)).BeginInit();
             this.SuspendLayout();
             // 
             // picGame
@@ -43,20 +41,11 @@
             this.picGame.TabIndex = 0;
             this.picGame.TabStop = false;
             // 
-            // picTopSafeZone
-            // 
-            this.picTopSafeZone.Location = new System.Drawing.Point(11, 12);
-            this.picTopSafeZone.Name = "picTopSafeZone";
-            this.picTopSafeZone.Size = new System.Drawing.Size(1373, 73);
-            this.picTopSafeZone.TabIndex = 1;
-            this.picTopSafeZone.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1396, 809);
-            this.Controls.Add(this.picTopSafeZone);
             this.Controls.Add(this.picGame);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -64,7 +53,6 @@
             this.Text = "Frogger - James Hunt";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picGame)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picTopSafeZone)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -72,7 +60,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox picGame;
-        private System.Windows.Forms.PictureBox picTopSafeZone;
     }
 }
 

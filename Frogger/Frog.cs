@@ -106,9 +106,9 @@ namespace Frogger
         }
 
         // Method to check if player reaches safe zone
-        public bool reachTop(int currentY, int top)
+        public bool reachTop(int currentY)
         {
-            return (currentY < top + this.height);
+            return (currentY == 0);
         }
 
         // Method to send player back to starting position

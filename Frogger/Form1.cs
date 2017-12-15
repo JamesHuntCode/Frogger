@@ -22,13 +22,13 @@ namespace Frogger
             InitializeComponent();
 
             this.Height = 940;
-            this.Width = 1520;
+            this.Width = 1515;
 
             this.picGame.Height = 900;
             this.picGame.Width = 1500;
             this.picGame.Location = new Point(0, 0);
 
-            this.picTopSafeZone.BackColor = Color.Green;
+            this.picTopSafeZone.BackColor = Color.LightGreen;
             this.picTopSafeZone.Height = 62;
             this.picTopSafeZone.Width = 1500;
             this.picTopSafeZone.Location = new Point(0, 0);
@@ -44,12 +44,41 @@ namespace Frogger
         {
             // Add logs to map
             Random rnd = new Random();
+
+            int randomV;
+            int randomX1;
+            int randomX2;
+            int randomD;
+            int tempV = -1;
             int offsetY = 50;
+
             for (int i = 0; i < 16; i++)
             {
-                // Make algorithm to check if row has same velocity setting as row above it & *MAYBE* allow for multiple logs on one row - implement later
-                this.logs.Add(new Log(50, 200, rnd.Next(0, this.Width - 200), offsetY, rnd.Next(0, 2), rnd.Next(1, 3)));
+                // Create random velocity and direction
+                randomV = rnd.Next(1, 3);
+                randomD = rnd.Next(0, 2);
+                randomX1 = rnd.Next(0, this.Width - 200);
+                randomX2 = rnd.Next(0, this.Width - 200);
+
+                // Set new velocity if row above has same velocity value
+                while (randomV == tempV)
+                {
+                    randomV = rnd.Next(1, 3);
+                }
+
+                // Make sure each log is spaced apart fairly
+                while (randomX2 < randomX1 + 250)
+                {
+                    randomX1 = rnd.Next(0, this.Width - 200);
+                    randomX2 = rnd.Next(0, this.Width - 200);
+                }
+ 
+                this.logs.Add(new Log(50, 200, randomX1, offsetY, randomD, randomV));
+                this.logs.Add(new Log(50, 200, randomX2, offsetY, randomD, randomV));
+               
+                // Increment offset
                 offsetY += 50;
+                tempV = randomV;
             }
 
             // Make player icon
@@ -103,8 +132,8 @@ namespace Frogger
                     // Player is on the log
                     if (this.logs[i].frogIsRiding(this.playerIcon))
                     {
-                        frogOnLog = true;
                         this.playerIcon.moveWithLog(this.logs[i]);
+                        frogOnLog = true;
                     }
                 }
 
@@ -121,9 +150,10 @@ namespace Frogger
 
             // Enable player behaviours:
 
-            if (this.playerIcon.reachTop(this.playerIcon.GetY(), 0))
+            // Player has reached the top
+            if (this.playerIcon.reachTop(this.playerIcon.GetY()))
             {
-                MessageBox.Show("You Win!");
+                MessageBox.Show("YOU WIN!");
             }
         }
 
